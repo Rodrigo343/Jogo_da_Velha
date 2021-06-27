@@ -1,10 +1,13 @@
 package jogo_da_velha.classes;
 
+import jogo_da_velha.dao.UsuarioDAO;
+import jogo_da_velha.classes.Usuario;
+
 public class Jogo {
 
-    String tabuleiro[][] = new String[3][3];
-    boolean jogador1 = true;
-    boolean jogoCompleto = false;
+    private String tabuleiro[][] = new String[3][3];
+    private boolean jogador1 = true;
+    private boolean jogoCompleto = false;
 
     public Jogo() {
     }
@@ -55,10 +58,14 @@ public class Jogo {
         }
     }
 
-    public void verificaVencedor(int linha, int coluna) {
+    private void verificaVencedor(int linha, int coluna) {
 
+         UsuarioDAO dao = new UsuarioDAO();
+         Usuario usuario = new Usuario();
+                        
         if (tabuleiro[linha][coluna].equals("X")) {
             System.out.print("Jogador 1 Vencedor");
+
 
         } else {
 
@@ -71,7 +78,7 @@ public class Jogo {
         setJogador1(true);
     }
 
-    public void verificaTabuleiro(String jogador) {
+    private void verificaTabuleiro(String jogador) {
 
         //------------------ verificando linhas -----------------
         if (tabuleiro[0][0].equals(jogador)

@@ -11,62 +11,40 @@ import jogo_da_velha.util.Conexao;
 import jogo_da_velha.classes.Usuario;
 
 public class UsuarioDAO {
-    
+
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
-    
+
     public UsuarioDAO() {
         con = new Conexao().getConexao();
     }
-    
+
     public List<Usuario> listar() {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuario";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 Usuario usuario = new Usuario(
                         rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
                 );
                 usuarios.add(usuario);
             }
-            
+
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        
+
         return usuarios;
     }
-    
-    public Usuario buscar(int id) {
-        Usuario usuario = null;
-        String sql = "SELECT * FROM usuario WHERE id = ?";
-        
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                usuario = new Usuario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
-                );
-            }
-            
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
-        
-        return usuario;
-    }
-    
+
     public void inserir(Usuario usuario) {
-        String sql = "INSERT INTO usuario VALUES(?, ?, ?, ?, ?)";
-        
+        String sql = "INSERT INTO usuario VALUES(?, ?, ?, ?, ?, ?)";
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, usuario.getId());
@@ -80,34 +58,36 @@ public class UsuarioDAO {
             erro.printStackTrace();
         }
     }
-    
+
     public void vitoria(Usuario usuario) {
-        String sql = "UPDATE usuario SET vitoria = ? WHERE id = ?";
-        
+        String sql = "UPDATE usuario SET vitoria = ? WHERE  id = ?";
+
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, usuario.getVitoria());
+            stmt.setInt(1, usuario.getPontos());
+            stmt.setInt(2, usuario.getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
     }
-    
+
     public void derrota(Usuario usuario) {
-        String sql = "UPDATE usuario SET derrota = ? WHERE id = ?";
-        
+        String sql = "UPDATE usuario SET derrota = ?  WHERE id = ?";
+
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, usuario.getDerrota());
+            stmt.setInt(1, usuario.getPontos());
+            stmt.setInt(2, usuario.getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
     }
-    
+
     public void empate(Usuario usuario) {
         String sql = "UPDATE usuario SET empate = ? WHERE id = ?";
-        
+
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, usuario.getEmpate());
@@ -117,31 +97,30 @@ public class UsuarioDAO {
         }
     }
 
-    
     public int lastId() {
         int id = 0;
-        String sql = "SELECT max(id) FROM administrador";
-        
+        String sql = "SELECT max(id) FROM usuario";
+
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             rs.next();
-            
+
             id = rs.getInt(1);
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        
-        return id + 1; 
+
+        return id + 1;
     }
-    
-    public boolean login(String email ,String senha){
-        
+
+    public boolean login(String email, String senha) {
+
         boolean validacao = false;
         String sql = "SELECT * FROM administrador WHERE email = ? AND senha = ?";
-           
-         try {
-            
+
+        try {
+
             stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, senha);
@@ -151,46 +130,38 @@ public class UsuarioDAO {
 
         } catch (SQLException erro) {
             erro.printStackTrace();
-        } 
-         
+        }
+
         return false;
 
     }
     
-    public Usuario buscarNome(String nome, String senha) {
-        Usuario usuario = null;
-        String sql = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
-        
+    public boolean nomeExistente(String nome) {
+        List<Usuario> usuariosNome = new ArrayList<>();
+        String sql = "SELECT nome FROM usuario";
+
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome );
-            stmt.setString(1, senha );
             rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                  usuario = new Usuario(
-                      rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getString("nome")
                 );
+                usuariosNome.add(usuario);
             }
-            
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
-        
-        return usuario;
-    }
 
-    public ResultSet carregarGrade() {
-        String sql = "SELECT id, nome, email, funcao FROM administrador";
-
-        try {
-            stmt = con.prepareStatement(sql);
-            rs = stmt.executeQuery();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
 
-        return rs;
+        for (Usuario u : usuariosNome) {
+            if (nome.equals(u.getNick())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void close() {

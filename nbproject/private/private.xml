@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/apresentacao/FrmJogo.java</file>
-            <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/classes/Jogo.java</file>
+            <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/apresentacao/cadastroTeste.java</file>
+            <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/apresentacao/FrmCadastroUsuario.java</file>
+            <file>file:/C:/Users/Rodrigo/Desktop/Jogo-da-Velha/src/jogo_da_velha/classes/Usuario.java</file>
         </group>
     </open-files>
 </project-private>
