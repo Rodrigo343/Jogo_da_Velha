@@ -103,8 +103,8 @@ public class FrmCadastroUsuario extends JFrame {
         txtSenha.setText("");
     }
 
-    public boolean verificarCampos() {
-        if (txtNick.getText().equals("") || txtSenha.getText().equals("")) {
+    private boolean verificarCampos() {
+        if (txtNick.getText().equals("") || String.copyValueOf(txtSenha.getPassword()).equals("")) {
             return false;
         }
 
@@ -147,11 +147,6 @@ public class FrmCadastroUsuario extends JFrame {
             }
 
         }
-    }
-
-    //confere se jogo esta completo
-    public void jogoCompleto() {
-
     }
 
     //Executar tela 

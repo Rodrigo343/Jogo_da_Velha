@@ -1,7 +1,5 @@
 package jogo_da_velha.classes;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-
 public class Usuario {
 
     private String nick;
@@ -16,16 +14,30 @@ public class Usuario {
 
     }
 
+    //Validar nome existente
     public Usuario(String nick) {
         setNick(nick);
     }
 
+    //Pegar jogadores logados
+    public Usuario(int id) {
+        setId(id);
+    }
+
+    //Verificar login
+    public Usuario(String nick, String senha) {
+        setNick(nick);
+        setSenha(senha);
+    }
+
+    //sujeito a mudanças
     public Usuario(String nick, String senha, int pontos) {
         setNick(nick);
         setSenha(senha);
         setPontos(pontos);
     }
 
+    //Criar jogador na camada visual
     public Usuario(int id, String nick, String senha) {
         setId(id);
         setNick(nick);
@@ -35,6 +47,16 @@ public class Usuario {
         setEmpate(0);
     }
 
+    //Setar usuarios logados
+    public Usuario(int id, String nick, int vitorias, int derotas, int empates) {
+        setId(id);
+        setNick(nick);
+        setVitoria(vitorias);
+        setDerrota(vitorias);
+        setEmpate(vitorias);
+    }
+
+    //cadastrar jogador no banco
     public Usuario(int id, String nick, String senha, int vitorias, int derotas, int empates) {
         setId(id);
         setNick(nick);

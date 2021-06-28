@@ -97,6 +97,51 @@ public class UsuarioDAO {
         }
     }
 
+    public Usuario selecionarJogador(String nick, String senha) {
+        Usuario usuario = null;
+        String sql = "SELECT id, nome, vitoria, derrota, empate FROM usuario WHERE nome = ? AND senha = ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nick);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                usuario = new Usuario(
+                        rs.getInt("id"), rs.getString("nome"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
+                );
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return usuario;
+    }
+
+    public Usuario selecionarInformacoesJogador(int id) {
+        Usuario usuario = null;
+        String sql = "SELECT id FROM usuario WHERE id = ?";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                usuario = new Usuario(
+                        rs.getInt("id")
+                );
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return usuario;
+    }
+
     public int lastId() {
         int id = 0;
         String sql = "SELECT max(id) FROM usuario";
@@ -117,7 +162,7 @@ public class UsuarioDAO {
     public boolean login(String email, String senha) {
 
         boolean validacao = false;
-        String sql = "SELECT * FROM administrador WHERE email = ? AND senha = ?";
+        String sql = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
 
         try {
 
@@ -135,7 +180,7 @@ public class UsuarioDAO {
         return false;
 
     }
-    
+
     public boolean nomeExistente(String nome) {
         List<Usuario> usuariosNome = new ArrayList<>();
         String sql = "SELECT nome FROM usuario";
