@@ -116,7 +116,9 @@ public class FrmCadastroUsuario extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            FrmInicio ini = new FrmInicio();
+            ini.setVisible(true);
+            setVisible(false);
         }
     }
 
@@ -136,11 +138,17 @@ public class FrmCadastroUsuario extends JFrame {
                 Usuario usuario = new Usuario(
                         dao.lastId(), txtNick.getText(), String.copyValueOf(txtSenha.getPassword())
                 );
+
                 dao.inserir(usuario);
                 dao.close();
 
                 JOptionPane.showMessageDialog(null, "Jogador cadastrado com sucesso!", "Mensagem de Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 limpar();
+
+                FrmLogin ini = new FrmLogin();
+                ini.setVisible(true);
+                setVisible(false);
+                return;
 
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);

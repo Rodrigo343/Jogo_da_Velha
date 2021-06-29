@@ -39,6 +39,9 @@ public class FrmJogo extends JFrame {
     private JLabel jLabelVitorias2;
     private JLabel jLabelDerrotas2;
     private JLabel jLabelEmpates2;
+    private JButton btnRank;
+    private JButton btnMenuPrincipal;
+    private JButton btnSair;
 
     private Jogo jogo = new Jogo();
     private Usuario[] jogadoresJogo = new Usuario[2];
@@ -74,6 +77,9 @@ public class FrmJogo extends JFrame {
         jLabelVitorias2 = new JLabel();
         jLabelDerrotas2 = new JLabel();
         jLabelEmpates2 = new JLabel();
+        btnRank = new JButton();
+        btnMenuPrincipal = new JButton();
+        btnSair = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,14 +101,24 @@ public class FrmJogo extends JFrame {
 
         btn9.addActionListener(new btn9Listener());
 
+        btnRank.setText("Rank");
+        btnRank.addActionListener(new RankListener());
+
+        btnMenuPrincipal.setText("Menu Principal");
+        btnMenuPrincipal.addActionListener(new MenuListener());
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new SairListener());
+
         carregarInformacoesJogador();
+        
         jogo.inicializaTabuleiro("");
 
         GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
@@ -137,11 +153,19 @@ public class FrmJogo extends JFrame {
                                         .addComponent(jLabelNick2)
                                         .addComponent(jLabelPontos2))
                                 .addGap(239, 239, 239))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(btnRank, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(59, Short.MAX_VALUE)
+                                .addContainerGap(67, Short.MAX_VALUE)
                                 .addComponent(jLabelNick1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
@@ -161,17 +185,6 @@ public class FrmJogo extends JFrame {
                                                 .addComponent(jLabelEmpates1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(btn6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btn5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(94, 94, 94))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(jLabelNick2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -182,7 +195,23 @@ public class FrmJogo extends JFrame {
                                                 .addComponent(jLabelDerrotas2)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabelEmpates2)
-                                                .addGap(106, 106, 106))))
+                                                .addGap(106, 106, 106))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btn6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btnRank, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(42, Short.MAX_VALUE))))
         );
 
         pack();
@@ -370,6 +399,39 @@ public class FrmJogo extends JFrame {
         jogoCompleto();
     }
 
+    private class RankListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FrmRank ini = new FrmRank();
+            ini.setVisible(true);
+            setVisible(false);
+        }
+    }
+
+    private class MenuListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente voltar ao menu principal?", "Mensagem do Programa", JOptionPane.YES_NO_OPTION) == 0) {
+                FrmInicio ini = new FrmInicio();
+                ini.setVisible(true);
+                setVisible(false);
+            }
+        }
+    }
+
+    private class SairListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Mensagem do Programa", JOptionPane.YES_NO_OPTION) == 0) {
+                System.exit(0);
+            }
+        }
+    }
+
     //confere se jogo esta completo
     private void jogoCompleto() {
         if (jogo.isJogoCompleto()) {
@@ -412,7 +474,7 @@ public class FrmJogo extends JFrame {
         jLabelEmpates1.setText("Empates: " + jogadoresJogo[0].getEmpate());
 
         jLabelNick2.setText("Nick: " + jogadoresJogo[1].getNick());
-        jLabelPontos2.setText("Pontos: " + jogadoresJogo[0].getPontos());
+        jLabelPontos2.setText("Pontos: " + jogadoresJogo[1].getPontos());
         jLabelVitorias2.setText("Vitórias: " + jogadoresJogo[1].getVitoria());
         jLabelDerrotas2.setText("Derrotas: " + jogadoresJogo[1].getDerrota());
         jLabelEmpates2.setText("Empates:" + jogadoresJogo[1].getEmpate());

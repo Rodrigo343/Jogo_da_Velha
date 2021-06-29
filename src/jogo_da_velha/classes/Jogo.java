@@ -147,7 +147,7 @@ public class Jogo {
             dao.vitoria(jogadores[0]);
 
             jogadores[1].setDerrota((jogadores[1].getDerrota() + 1));
-            jogadores[1].setPontos((jogadores[1].getDerrota() - 2));
+            jogadores[1].setPontos((jogadores[1].getPontos()- 2));
             dao.derrota(jogadores[1]);
         } else {
 
@@ -158,7 +158,7 @@ public class Jogo {
             dao.derrota(jogadores[0]);
 
             jogadores[1].setVitoria((jogadores[1].getVitoria() + 1));
-            jogadores[1].setPontos((jogadores[1].getDerrota() + 2));
+            jogadores[1].setPontos((jogadores[1].getPontos()+ 2));
             dao.vitoria(jogadores[1]);
 
         }

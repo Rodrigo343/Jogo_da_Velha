@@ -61,7 +61,7 @@ public class FrmLogin extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Logar");
         btnCadastrar.addActionListener(new CadastrarListener());
 
         btnVoltar.setText("Voltar");
@@ -193,7 +193,9 @@ public class FrmLogin extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            FrmInicio ini = new FrmInicio();
+            ini.setVisible(true);
+            setVisible(false);
         }
     }
 
@@ -216,7 +218,6 @@ public class FrmLogin extends JFrame {
 
                         usuario = dao.selecionarJogadorId(txtNick2.getText(), String.copyValueOf(txtSenha2.getPassword()));
                         jogador2 = usuario.getId();
-                        
                         dao.close();
 
                         FrmJogo ini = new FrmJogo();
@@ -225,9 +226,11 @@ public class FrmLogin extends JFrame {
                         return;
                     }
 
+                    dao.close();
                     JOptionPane.showMessageDialog(null, "Nick e ou senha do jogador 2 inválidos\n Ou login igual ao do jogador 1!");
 
                 } else {
+                    dao.close();
                     JOptionPane.showMessageDialog(null, "Nick e ou senha do jogador 1 inválidos!");
                 }
 

@@ -44,6 +44,7 @@ public class rankTeste extends javax.swing.JFrame {
         jLabelPontuacao4 = new javax.swing.JLabel();
         jLabelPontuacao5 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +81,18 @@ public class rankTeste extends javax.swing.JFrame {
         jLabelPontuacao5.setText("jLabel1");
 
         btnVoltar.setText("jButton1");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnSair.setText("jButton1");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,8 +125,10 @@ public class rankTeste extends javax.swing.JFrame {
                     .addComponent(jLabelPontuacao1))
                 .addGap(70, 70, 70))
             .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addGap(68, 68, 68)
                 .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSair)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,13 +161,23 @@ public class rankTeste extends javax.swing.JFrame {
                     .addComponent(jLabelPosicao5)
                     .addComponent(jLabelNick5)
                     .addComponent(jLabelPontuacao5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(29, 29, 29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar)
+                    .addComponent(btnSair))
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +215,7 @@ public class rankTeste extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabelNick1;
     private javax.swing.JLabel jLabelNick2;

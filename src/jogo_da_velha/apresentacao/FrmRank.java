@@ -37,6 +37,7 @@ public class FrmRank extends JFrame {
     private JLabel jLabelPontuacao4;
     private JLabel jLabelPontuacao5;
     private JLabel jLabelTitulo;
+    private JButton btnSair;
     private JButton btnVoltar;
 
     private Usuario[] jogadoresRank = new Usuario[5];
@@ -65,12 +66,18 @@ public class FrmRank extends JFrame {
         jLabelPontuacao4 = new JLabel();
         jLabelPontuacao5 = new JLabel();
         jLabelTitulo = new JLabel();
+        btnSair = new JButton();
         btnVoltar = new JButton();
+
+        carregaJogadoresRank();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new VoltarListener());
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new SairListener());
 
         jLabelPosicao1.setFont(new Font("Segoe UI", 0, 18));
         jLabelPosicao1.setText("1- ");
@@ -87,8 +94,36 @@ public class FrmRank extends JFrame {
         jLabelPosicao5.setFont(new Font("Segoe UI", 0, 18));
         jLabelPosicao5.setText("5- ");
 
-        carregaJogadoresRank();
+                jLabelNick1.setFont(new Font("Segoe UI", 0, 18));
+        jLabelNick1.setText(jogadoresRank[0].getNick());
 
+        jLabelNick2.setFont(new Font("Segoe UI", 0, 18));
+        jLabelNick2.setText(jogadoresRank[1].getNick());
+
+        jLabelNick3.setFont(new Font("Segoe UI", 0, 18));
+        jLabelNick3.setText(jogadoresRank[2].getNick());
+
+        jLabelNick4.setFont(new Font("Segoe UI", 0, 18));
+        jLabelNick4.setText(jogadoresRank[3].getNick());
+
+        jLabelNick5.setFont(new Font("Segoe UI", 0, 18));
+        jLabelNick5.setText(jogadoresRank[4].getNick());
+
+        jLabelPontuacao1.setFont(new Font("Segoe UI", 0, 18));
+        jLabelPontuacao1.setText(jogadoresRank[0].getPontos() + "");
+
+        jLabelPontuacao2.setFont(new Font("Segoe UI", 0, 18));
+        jLabelPontuacao2.setText(jogadoresRank[1].getPontos() + "");
+
+        jLabelPontuacao3.setFont(new Font("Segoe UI", 0, 18));
+        jLabelPontuacao3.setText(jogadoresRank[2].getPontos() + "");
+
+        jLabelPontuacao4.setFont(new Font("Segoe UI", 0, 18));
+        jLabelPontuacao4.setText(jogadoresRank[3].getPontos() + "");
+
+        jLabelPontuacao5.setFont(new Font("Segoe UI", 0, 18));
+        jLabelPontuacao5.setText(jogadoresRank[4].getPontos() + "");
+        
         jLabelTitulo.setFont(new Font("Segoe UI", 0, 18));
         jLabelTitulo.setText("TOP 5");
 
@@ -123,8 +158,10 @@ public class FrmRank extends JFrame {
                                         .addComponent(jLabelPontuacao1))
                                 .addGap(70, 70, 70))
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
+                                .addGap(68, 68, 68)
                                 .addComponent(btnVoltar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSair)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -157,9 +194,11 @@ public class FrmRank extends JFrame {
                                         .addComponent(jLabelPosicao5)
                                         .addComponent(jLabelNick5)
                                         .addComponent(jLabelPontuacao5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                                .addComponent(btnVoltar)
-                                .addGap(29, 29, 29))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnVoltar)
+                                        .addComponent(btnSair))
+                                .addGap(35, 35, 35))
         );
 
         pack();
@@ -168,38 +207,9 @@ public class FrmRank extends JFrame {
     private void carregaJogadoresRank() {
 
         UsuarioDAO dao = new UsuarioDAO();
-        Usuario[] jogadoresRank = dao.listarRank();
+        jogadoresRank = dao.listarRank();
         dao.close();
-        
-        jLabelNick1.setFont(new Font("Segoe UI", 0, 18));
-        jLabelNick1.setText(jogadoresRank[0].getNick());
 
-        jLabelNick2.setFont(new Font("Segoe UI", 0, 18));
-        jLabelNick2.setText(jogadoresRank[1].getNick());
-
-        jLabelNick3.setFont(new Font("Segoe UI", 0, 18));
-        jLabelNick3.setText(jogadoresRank[2].getNick());
-
-        jLabelNick4.setFont(new Font("Segoe UI", 0, 18));
-        jLabelNick4.setText(jogadoresRank[3].getNick());
-
-        jLabelNick5.setFont(new Font("Segoe UI", 0, 18));
-        jLabelNick5.setText(jogadoresRank[4].getNick());
-
-        jLabelPontuacao1.setFont(new Font("Segoe UI", 0, 18));
-        jLabelPontuacao1.setText(jogadoresRank[0].getPontos() + "");
-
-        jLabelPontuacao2.setFont(new Font("Segoe UI", 0, 18));
-        jLabelPontuacao2.setText(jogadoresRank[1].getPontos() + "");
-
-        jLabelPontuacao3.setFont(new Font("Segoe UI", 0, 18));
-        jLabelPontuacao3.setText(jogadoresRank[2].getPontos() + "");
-
-        jLabelPontuacao4.setFont(new Font("Segoe UI", 0, 18));
-        jLabelPontuacao4.setText(jogadoresRank[3].getPontos() + "");
-
-        jLabelPontuacao5.setFont(new Font("Segoe UI", 0, 18));
-        jLabelPontuacao5.setText(jogadoresRank[4].getPontos() + "");
     }
 
     //ActionListener dos botões
@@ -207,7 +217,19 @@ public class FrmRank extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            FrmJogo ini = new FrmJogo();
+            ini.setVisible(true);
+            setVisible(false);
+        }
+    }
 
+    private class SairListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Mensagem do Programa", JOptionPane.YES_NO_OPTION) == 0) {
+                System.exit(0);
+            }
         }
     }
 
