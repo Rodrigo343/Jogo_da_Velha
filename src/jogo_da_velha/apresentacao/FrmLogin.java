@@ -208,6 +208,7 @@ public class FrmLogin extends JFrame {
                 UsuarioDAO dao = new UsuarioDAO();
 
                 if (dao.login(txtNick1.getText(), String.copyValueOf(txtSenha1.getPassword()))) {
+
                     if (dao.login(txtNick2.getText(), String.copyValueOf(txtSenha2.getPassword()))
                             && !txtNick1.getText().equals(txtNick2.getText())) {
 
@@ -226,14 +227,13 @@ public class FrmLogin extends JFrame {
                         return;
                     }
 
-                    dao.close();
                     JOptionPane.showMessageDialog(null, "Nick e ou senha do jogador 2 inválidos\n Ou login igual ao do jogador 1!");
-
                 } else {
-                    dao.close();
+
                     JOptionPane.showMessageDialog(null, "Nick e ou senha do jogador 1 inválidos!");
                 }
 
+                dao.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos", "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
             }
