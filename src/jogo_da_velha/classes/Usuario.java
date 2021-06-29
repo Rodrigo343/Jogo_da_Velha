@@ -30,13 +30,6 @@ public class Usuario {
         setSenha(senha);
     }
 
-    //sujeito a mudanças
-    public Usuario(String nick, String senha, int pontos) {
-        setNick(nick);
-        setSenha(senha);
-        setPontos(pontos);
-    }
-
     //Criar jogador na camada visual
     public Usuario(int id, String nick, String senha) {
         setId(id);
@@ -45,25 +38,28 @@ public class Usuario {
         setVitoria(0);
         setDerrota(0);
         setEmpate(0);
+        setPontos(0);
     }
 
     //Setar usuarios logados
-    public Usuario(int id, String nick, int vitorias, int derotas, int empates) {
+    public Usuario(int id, String nick, int vitorias, int derotas, int empates, int pontos) {
         setId(id);
         setNick(nick);
         setVitoria(vitorias);
-        setDerrota(vitorias);
-        setEmpate(vitorias);
+        setDerrota(derotas);
+        setEmpate(empates);
+        setPontos(pontos);
     }
 
     //cadastrar jogador no banco
-    public Usuario(int id, String nick, String senha, int vitorias, int derotas, int empates) {
+    public Usuario(int id, String nick, String senha, int vitorias, int derotas, int empates, int pontos) {
         setId(id);
         setNick(nick);
         setSenha(senha);
         setVitoria(vitorias);
-        setDerrota(vitorias);
-        setEmpate(vitorias);
+        setDerrota(derotas);
+        setEmpate(empates);
+        setPontos(pontos);
     }
 
     public void setId(int id) {
@@ -124,7 +120,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nick=" + nick + ", senha=" + senha + ", vitoria=" + vitoria + ", derrota=" + derrota + ", empate=" + empate + '}';
+        return "Usuario " + "nick=" + nick + ", senha=" + senha + ", vitoria=" + vitoria + ", derrota=" + derrota + ", empate=" + empate + '}';
     }
 
 }

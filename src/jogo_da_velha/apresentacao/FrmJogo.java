@@ -29,19 +29,29 @@ public class FrmJogo extends JFrame {
     private JToggleButton btn7;
     private JToggleButton btn8;
     private JToggleButton btn9;
-    private JLabel jLabel1;
+    private JLabel jLabelNick1;
+    private JLabel jLabelPontos1;
+    private JLabel jLabelVitorias1;
+    private JLabel jLabelDerrotas1;
+    private JLabel jLabelEmpates1;
+    private JLabel jLabelNick2;
+    private JLabel jLabelPontos2;
+    private JLabel jLabelVitorias2;
+    private JLabel jLabelDerrotas2;
+    private JLabel jLabelEmpates2;
+
     private Jogo jogo = new Jogo();
     private Usuario[] jogadoresJogo = new Usuario[2];
 
     public FrmJogo() {
         super("Titulo - Titulo");
+        setJogadorLogado();
+        carregaJogadorClasse();
         initComponents();
     }
 
     private void initComponents() {
 
-        setJogadorLogado();
-                
         System.out.println(jogadoresJogo[0]);
         System.out.println(jogadoresJogo[1]);
 
@@ -54,7 +64,16 @@ public class FrmJogo extends JFrame {
         btn9 = new JToggleButton();
         btn1 = new JToggleButton();
         btn2 = new JToggleButton();
-        jLabel1 = new JLabel();
+        jLabelNick1 = new JLabel();
+        jLabelPontos1 = new JLabel();
+        jLabelVitorias1 = new JLabel();
+        jLabelDerrotas1 = new JLabel();
+        jLabelEmpates1 = new JLabel();
+        jLabelNick2 = new JLabel();
+        jLabelPontos2 = new JLabel();
+        jLabelVitorias2 = new JLabel();
+        jLabelDerrotas2 = new JLabel();
+        jLabelEmpates2 = new JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,63 +95,94 @@ public class FrmJogo extends JFrame {
 
         btn9.addActionListener(new btn9Listener());
 
-        jLabel1.setText("XDXDXD");
+        carregarInformacoesJogador();
         jogo.inicializaTabuleiro("");
 
         GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 109, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(81, 81, 81)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(216, 216, 216)
-                                                .addComponent(jLabel1)))
-                                .addContainerGap(197, Short.MAX_VALUE))
+                                        .addComponent(jLabelNick1)
+                                        .addComponent(jLabelVitorias2)
+                                        .addComponent(jLabelDerrotas2)
+                                        .addComponent(jLabelEmpates2)
+                                        .addComponent(jLabelDerrotas1)
+                                        .addComponent(jLabelEmpates1)
+                                        .addComponent(jLabelVitorias1)
+                                        .addComponent(jLabelPontos1)
+                                        .addComponent(jLabelNick2)
+                                        .addComponent(jLabelPontos2))
+                                .addGap(239, 239, 239))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
+                                .addContainerGap(59, Short.MAX_VALUE)
+                                .addComponent(jLabelNick1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(25, 25, 25)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabelPontos1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabelVitorias1)
+                                                .addGap(15, 15, 15)
+                                                .addComponent(jLabelDerrotas1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelEmpates1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btn6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btn6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btn9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(94, 94, 94))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabelNick2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabelPontos2)
+                                                .addGap(11, 11, 11)
+                                                .addComponent(jLabelVitorias2)
+                                                .addGap(15, 15, 15)
+                                                .addComponent(jLabelDerrotas2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelEmpates2)
+                                                .addGap(106, 106, 106))))
         );
 
         pack();
@@ -330,16 +380,49 @@ public class FrmJogo extends JFrame {
 
     //pegar jogadores logados
     private void setJogadorLogado() {
-        
+
         UsuarioDAO dao = new UsuarioDAO();
         Usuario usuario = new Usuario();
 
-        usuario = dao.selecionarInformacoesJogador(FrmLogin.id1);
+        usuario = dao.selecionarInformacoesJogador(FrmLogin.jogador1);
         jogadoresJogo[0] = usuario;
-        
-        usuario = dao.selecionarInformacoesJogador(FrmLogin.id2);
-        jogadoresJogo[1] = usuario;
 
+        usuario = dao.selecionarInformacoesJogador(FrmLogin.jogador2);
+        jogadoresJogo[1] = usuario;
+        dao.close();
+
+    }
+
+    private void carregarInformacoesJogador() {
+
+        UsuarioDAO dao = new UsuarioDAO();
+        Usuario usuario = new Usuario();
+
+        usuario = dao.selecionarInformacoesJogador(jogadoresJogo[0].getId());
+        jogadoresJogo[0] = usuario;
+
+        usuario = dao.selecionarInformacoesJogador(jogadoresJogo[1].getId());
+        jogadoresJogo[1] = usuario;
+        dao.close();
+
+        jLabelNick1.setText("Nick: " + jogadoresJogo[0].getNick());
+        jLabelPontos1.setText("Pontos: " + jogadoresJogo[0].getPontos());
+        jLabelVitorias1.setText("Vitórias: " + jogadoresJogo[0].getVitoria());
+        jLabelDerrotas1.setText("Derrotas: " + jogadoresJogo[0].getDerrota());
+        jLabelEmpates1.setText("Empates: " + jogadoresJogo[0].getEmpate());
+
+        jLabelNick2.setText("Nick: " + jogadoresJogo[1].getNick());
+        jLabelPontos2.setText("Pontos: " + jogadoresJogo[0].getPontos());
+        jLabelVitorias2.setText("Vitórias: " + jogadoresJogo[1].getVitoria());
+        jLabelDerrotas2.setText("Derrotas: " + jogadoresJogo[1].getDerrota());
+        jLabelEmpates2.setText("Empates:" + jogadoresJogo[1].getEmpate());
+
+    }
+
+    private void carregaJogadorClasse() {
+
+        jogo.setJogadores(jogadoresJogo[0], 0);
+        jogo.setJogadores(jogadoresJogo[1], 1);
     }
 
     //resetar botões
@@ -374,6 +457,8 @@ public class FrmJogo extends JFrame {
         btn7.setEnabled(true);
         btn8.setEnabled(true);
         btn9.setEnabled(true);
+
+        carregarInformacoesJogador();
 
     }
 

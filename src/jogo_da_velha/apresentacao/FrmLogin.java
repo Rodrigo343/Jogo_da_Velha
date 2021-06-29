@@ -23,8 +23,8 @@ import jogo_da_velha.apresentacao.FrmJogo;
 
 public class FrmLogin extends JFrame {
 
-    public static int id1;
-    public static int id2;
+    public static int jogador1;
+    public static int jogador2;
 
     private JLabel jLabelNick1;
     private JLabel jLabelSenha1;
@@ -211,16 +211,17 @@ public class FrmLogin extends JFrame {
 
                         Usuario usuario = new Usuario();
 
-                        usuario = dao.selecionarJogador(txtNick1.getText(), String.copyValueOf(txtSenha1.getPassword()));
-                        id1 = usuario.getId();
+                        usuario = dao.selecionarJogadorId(txtNick1.getText(), String.copyValueOf(txtSenha1.getPassword()));
+                        jogador1 = usuario.getId();
 
-                        usuario = dao.selecionarJogador(txtNick2.getText(), String.copyValueOf(txtSenha2.getPassword()));
-                        id2 = usuario.getId();
+                        usuario = dao.selecionarJogadorId(txtNick2.getText(), String.copyValueOf(txtSenha2.getPassword()));
+                        jogador2 = usuario.getId();
+                        
+                        dao.close();
 
                         FrmJogo ini = new FrmJogo();
                         ini.setVisible(true);
                         setVisible(false);
-                        dao.close();
                         return;
                     }
 

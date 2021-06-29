@@ -30,7 +30,7 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
+                        rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate"), rs.getInt("pontos")
                 );
                 usuarios.add(usuario);
             }
@@ -43,7 +43,7 @@ public class UsuarioDAO {
     }
 
     public void inserir(Usuario usuario) {
-        String sql = "INSERT INTO usuario VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -53,6 +53,7 @@ public class UsuarioDAO {
             stmt.setInt(4, usuario.getVitoria());
             stmt.setInt(5, usuario.getDerrota());
             stmt.setInt(6, usuario.getEmpate());
+            stmt.setInt(7, usuario.getPontos());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
@@ -60,12 +61,13 @@ public class UsuarioDAO {
     }
 
     public void vitoria(Usuario usuario) {
-        String sql = "UPDATE usuario SET vitoria = ? WHERE  id = ?";
+        String sql = "UPDATE usuario SET vitoria = ?, pontos = ? WHERE  id = ?";
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, usuario.getPontos());
-            stmt.setInt(2, usuario.getId());
+            stmt.setInt(1, usuario.getVitoria());
+            stmt.setInt(2, usuario.getPontos());
+            stmt.setInt(3, usuario.getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
@@ -73,33 +75,37 @@ public class UsuarioDAO {
     }
 
     public void derrota(Usuario usuario) {
-        String sql = "UPDATE usuario SET derrota = ?  WHERE id = ?";
+        String sql = "UPDATE usuario SET derrota = ?, pontos = ?  WHERE id = ?";
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, usuario.getPontos());
-            stmt.setInt(2, usuario.getId());
+            stmt.setInt(1, usuario.getDerrota());
+            stmt.setInt(2, usuario.getPontos());
+            stmt.setInt(3, usuario.getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
+
     }
 
     public void empate(Usuario usuario) {
-        String sql = "UPDATE usuario SET empate = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET empate = ?, pontos = ? WHERE id = ?";
 
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, usuario.getEmpate());
+            stmt.setInt(2, usuario.getPontos());
+            stmt.setInt(3, usuario.getId());
             stmt.execute();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
     }
 
-    public Usuario selecionarJogador(String nick, String senha) {
+    public Usuario selecionarJogadorId(String nick, String senha) {
         Usuario usuario = null;
-        String sql = "SELECT id, nome, vitoria, derrota, empate FROM usuario WHERE nome = ? AND senha = ?";
+        String sql = "SELECT id FROM usuario WHERE nome = ? AND senha = ?";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -109,7 +115,7 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 usuario = new Usuario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate")
+                        rs.getInt("id")
                 );
             }
 
@@ -122,7 +128,7 @@ public class UsuarioDAO {
 
     public Usuario selecionarInformacoesJogador(int id) {
         Usuario usuario = null;
-        String sql = "SELECT id FROM usuario WHERE id = ?";
+        String sql = "SELECT id, nome, vitoria, derrota, empate, pontos FROM usuario WHERE id = ?";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -131,7 +137,7 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 usuario = new Usuario(
-                        rs.getInt("id")
+                        rs.getInt("id"), rs.getString("nome"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate"),rs.getInt("pontos")
                 );
             }
 
