@@ -30,6 +30,12 @@ public class Usuario {
         setSenha(senha);
     }
 
+    //Verificar login
+    public Usuario(String nick, int pontos) {
+        setNick(nick);
+        setPontos(pontos);
+    }
+
     //Criar jogador na camada visual
     public Usuario(int id, String nick, String senha) {
         setId(id);

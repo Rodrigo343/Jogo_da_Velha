@@ -20,28 +20,6 @@ public class UsuarioDAO {
         con = new Conexao().getConexao();
     }
 
-    public List<Usuario> listar() {
-        List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
-
-        try {
-            stmt = con.prepareStatement(sql);
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Usuario usuario = new Usuario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getString("senha"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate"), rs.getInt("pontos")
-                );
-                usuarios.add(usuario);
-            }
-
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
-
-        return usuarios;
-    }
-
     public void inserir(Usuario usuario) {
         String sql = "INSERT INTO usuario VALUES(?, ?, ?, ?, ?, ?, ?)";
 
@@ -137,7 +115,7 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 usuario = new Usuario(
-                        rs.getInt("id"), rs.getString("nome"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate"),rs.getInt("pontos")
+                        rs.getInt("id"), rs.getString("nome"), rs.getInt("vitoria"), rs.getInt("derrota"), rs.getInt("empate"), rs.getInt("pontos")
                 );
             }
 
@@ -146,6 +124,35 @@ public class UsuarioDAO {
         }
 
         return usuario;
+    }
+
+    public Usuario[] listarRank() {
+        int cont = 0;
+        Usuario[] usuarios = new Usuario[5];
+        String sql = "SELECT nome, pontos\n"
+                + "FROM usuario\n"
+                + "ORDER BY pontos DESC\n"
+                + "LIMIT\n"
+                + "5\n";
+
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getString("nome"), rs.getInt("pontos")
+                );
+
+                usuarios[cont] = usuario;
+                cont++;
+            }
+
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return usuarios;
     }
 
     public int lastId() {
