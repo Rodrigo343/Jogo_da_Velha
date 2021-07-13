@@ -9,6 +9,7 @@ public class Jogo {
     private boolean jogador1 = true;
     private boolean jogoCompleto = false;
     private Usuario[] jogadores = new Usuario[2];
+    private String Vencedor = ""; 
 
     public Jogo() {
     }
@@ -36,6 +37,24 @@ public class Jogo {
     public boolean isJogoCompleto() {
         return jogoCompleto;
     }
+
+    public Usuario[] getJogadores() {
+        return jogadores;
+    }
+
+    public void setJogadores(Usuario[] jogadores) {
+        this.jogadores = jogadores;
+    }
+
+    public String getVencedor() {
+        return Vencedor;
+    }
+
+    public void setVencedor(String Vencedor) {
+        this.Vencedor = Vencedor;
+    }
+    
+    
 
     public void setJogadores(Usuario jogadores, int pos) {
         this.jogadores[pos] = jogadores;
@@ -140,6 +159,7 @@ public class Jogo {
 
         if (tabuleiro[linha][coluna].equals("X")) {
             System.out.print("Jogador 1 Vencedor");
+            setVencedor("X");
 
             jogadores[0].setVitoria((jogadores[0].getVitoria() + 1));
             dao.vitoria(jogadores[0]);
@@ -152,6 +172,7 @@ public class Jogo {
         } else {
 
             System.out.print("Jogador 2 Vencedor");
+            setVencedor("O");
 
             jogadores[0].setDerrota((jogadores[0].getDerrota() + 1));
             jogadores[0].setPontos((jogadores[0].getPontos() - 2));
@@ -169,6 +190,8 @@ public class Jogo {
 
     private void empate() {
 
+        setVencedor("Empate");
+        
         UsuarioDAO dao = new UsuarioDAO();
         Usuario usuario = new Usuario();
 
